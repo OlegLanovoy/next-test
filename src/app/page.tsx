@@ -26,12 +26,14 @@ export default function Home() {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [cuisine, setCuisine] = useState("");
-  const [maxTime, setMaxTime] = useState("");
+  const [maxReadyTime, setMaxReadyTime] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
-    setIsFormValid(query.trim() !== "" || cuisine !== "" || maxTime !== "");
-  }, [query, cuisine, maxTime]);
+    setIsFormValid(
+      query.trim() !== "" || cuisine !== "" || maxReadyTime !== ""
+    );
+  }, [query, cuisine, maxReadyTime]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +41,7 @@ export default function Home() {
     const params = new URLSearchParams();
     if (query) params.append("query", query);
     if (cuisine) params.append("cuisine", cuisine);
-    if (maxTime) params.append("maxTime", maxTime);
+    if (maxReadyTime) params.append("maxReadyTime", maxReadyTime);
 
     router.push(`/recipes?${params.toString()}`);
   };
@@ -72,7 +74,7 @@ export default function Home() {
                   <SelectValue placeholder="Select cuisine" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="italian">Italian</SelectItem>
+                  <SelectItem value="Italian">Italian</SelectItem>
                   <SelectItem value="mexican">Mexican</SelectItem>
                   <SelectItem value="chinese">Chinese</SelectItem>
                   <SelectItem value="indian">Indian</SelectItem>
@@ -93,8 +95,8 @@ export default function Home() {
                 type="number"
                 placeholder="e.g., 30"
                 min="1"
-                value={maxTime}
-                onChange={(e) => setMaxTime(e.target.value)}
+                value={maxReadyTime}
+                onChange={(e) => setMaxReadyTime(e.target.value)}
               />
             </div>
 
